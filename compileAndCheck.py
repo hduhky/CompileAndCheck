@@ -6,8 +6,6 @@ import sys
 
 filePath = sys.argv[1]
 # filePath = '/Users/smb-lsp/Desktop/Switch/trunk_ezlive_switch/ios/EZViewer/Classes/ViewController/UVCloudLoginViewController.m'
-fileName = os.path.basename(filePath).split('.')[0]
-print('fileName: ' + fileName + '\n')
 
 file = open(filePath, 'r+')
 fileContent = file.read()
@@ -40,7 +38,7 @@ def compileWithoutPrefixHeader():
     return compileResult
 
 for headerName in result:
-    if fileName in headerName :
+    if headerName in filePath :
         continue
     commentHeader(headerName)
 
