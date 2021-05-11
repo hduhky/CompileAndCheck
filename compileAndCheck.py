@@ -10,14 +10,14 @@ filePath = sys.argv[1]
 file = open(filePath, 'r+')
 fileContent = file.read()
 file.close()
-pattern = re.compile('(?<=#import ")([^"]*)')   # 查找数字
+pattern = re.compile(r'(?<=#import ")([^"]*)')   # 查找数字
 result = pattern.findall(fileContent)
 
 unusedHeaderList = []
 def commentHeader(headerName):
     if '+' in headerName:
         headerName = headerName.replace('+', '\+')
-    pattern = re.compile(r'#import ?\"' + headerName + '\"')   
+    pattern = re.compile(r'#import ?"' + headerName + r'"')   
     result = pattern.findall(fileContent)
     for headerImport in result:
         replacement = '//' + headerImport
