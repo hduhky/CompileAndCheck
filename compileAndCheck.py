@@ -17,6 +17,8 @@ result = pattern.findall(fileContent)
 
 unusedHeaderList = []
 def commentHeader(headerName):
+    if '+' in headerName:
+        headerName = headerName.replace('+', '\+')
     pattern = re.compile(r'#import ?\"' + headerName + '\"')   
     result = pattern.findall(fileContent)
     for headerImport in result:
@@ -26,6 +28,8 @@ def commentHeader(headerName):
         file.write(newFileContent)
         file.close()
         if compileWithoutPrefixHeader() == 0:
+            if '\\' in headerName:
+                headerName = headerName.replace('\\', '')
             unusedHeaderList.append(headerName)
         file = open(filePath, 'w')
         file.write(fileContent)
