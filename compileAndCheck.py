@@ -4,8 +4,9 @@ import os
 import re
 import sys
 
-filePath = sys.argv[1]
 # filePath = '/Users/smb-lsp/Desktop/Switch/trunk_ezlive_switch/ios/EZViewer/Classes/ViewController/UVCloudLoginViewController.m'
+filePath = sys.argv[1]
+fileName = os.path.basename(filePath).split('.')[0]
 
 file = open(filePath, 'r+')
 fileContent = file.read()
@@ -38,9 +39,13 @@ def compileWithoutPrefixHeader():
     return compileResult
 
 for headerName in result:
-    if headerName in filePath :
+    if headerName.split('.')[0] == fileName:
         continue
+    print('\n')
+    print('Start Compile And Check ' + headerName + '\n')
     commentHeader(headerName)
+    print('\n')
+    print('*' * 100)
 
 
 print('unused header list:\n')
